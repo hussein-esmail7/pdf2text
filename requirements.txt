@@ -1,0 +1,9 @@
+sys
+os
+pathlib
+time
+json
+pdf2image
+pillow
+pytesseract
+pick

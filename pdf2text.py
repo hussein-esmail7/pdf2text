@@ -1,19 +1,21 @@
 
 '''
-pdf.py
-Hussein esmail
+pdf2text.py
+Hussein Esmail
 Created: 2021 02 21
 Updated: 2021 07 18
-Description: This program can convert text from a PDF to text.
+Description: This program can convert text from a PDF to text. It's not perfect, but it's better than nothing.
 '''
 
 import sys                  # Used to exit the program
 import os                   # Used to change directories
 from pathlib import Path    # Used to 'touch' output file
 import time                 # Used to count how long the program takes
-import subprocess           # Used to install libraries if they're not already
-import pkg_resources        # Used to check which libraries are installed
-import json                 # Used to import configs used for writing to files            
+import json                 # Used to import configs used for writing to files    
+from pdf2image import convert_from_path     # Used to convert pdf to images
+from PIL import Image                       # Used to open image for pytesseract
+from pytesseract import image_to_string     # Converts image to text
+from pick import pick                       # Used to ask the user the output file type        
 
 """
 Dependencies:
@@ -38,15 +40,6 @@ TEMP_IMAGE_TYPE_FORMAT  = "JPEG"
 PDF_LANG                = "eng"
 JSON_FILE_NAME          = "styling.json"
 
-def check_install(lib_install):
-    # Checks if all necessary packages are installed. If not, install them.
-    if lib_install not in {pkg.key for pkg in pkg_resources.working_set}:
-        python = sys.executable
-        print(f"You didn't have the {lib_install} library, but I'm installing it for you...")
-        subprocess.check_call([python, '-m', 'pip', 'install', lib_install], stdout=subprocess.DEVNULL)
-        print(f"{lib_install} installed.")
-
-
 def check_filename(front, extension):
     output_filename_count = 1
     to_return = ""
@@ -63,17 +56,6 @@ def check_filename(front, extension):
     return to_return
 
 def main():
-    check_install("pdf2image")
-    check_install("pillow")         # Note: Pillow is the PIL library
-    check_install("pytesseract")
-    check_install("pick")
-    
-    # These are here in case they weren't already installed
-    from pdf2image import convert_from_path     # Used to convert pdf to images
-    from PIL import Image                       # Used to open image for pytesseract
-    from pytesseract import image_to_string     # Converts image to text
-    from pick import pick                       # Used to ask the user the output file type
-
     page_num            = 1     # Page counter
     convertable_files   = []    # Files that are in the directory that can be converted    
     output_text         = []    # Text that will go in the output document(s)
@@ -143,5 +125,4 @@ def main():
     sys.exit()
 
 if __name__ == "__main__":
-    check_install() 
     main()
