@@ -1,0 +1,10 @@
+{
+    "header_document": {
+        ".md": "# ",
+        ".txt": ""
+    },
+    "header_page": {
+        ".md": "## Page",
+        ".txt": "Page"
+    }
+}
