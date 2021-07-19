@@ -38,6 +38,7 @@ When outputting, the program will ask if you want to print to console, save as P
 
 ## TODO
 - Add `copy to clipboard` output method
+- Add `LaTeX` output method
 
 ## Donate
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/husseinesmail)
